@@ -4,70 +4,42 @@ public class PatientPrediction {
 
     private int id;
     private String resultado;
-    private String advice;
+    private String advice; // Consejo de la IA
 
-    private String age;
-    private String sex;
-    private String histologicType;
-    private String degreeOfDifferentiation;
-    private String bone;
-    private String boneMarrow;
-    private String lung;
-    private String pleura;
-    private String peritoneum;
-    private String liver;
-    private String brain;
-    private String skin;
-    private String neck;
-    private String supraclavicular;
-    private String axillar;
-    private String mediastinum;
-    private String abdominal;
+    private double preg;
+    private double plas;
+    private double pres;
+    private double skin;
+    private double insu;
+    private double mass;
+    private double pedi;
+    private double age;
 
     public PatientPrediction(int id, String resultado, String advice, PredictionRequest request) {
         this.id = id;
         this.resultado = resultado;
         this.advice = advice;
 
-        this.age = request.getAge();
-        this.sex = request.getSex();
-        this.histologicType = request.getHistologicType();
-        this.degreeOfDifferentiation = request.getDegreeOfDifferentiation();
-        this.bone = request.getBone();
-        this.boneMarrow = request.getBoneMarrow();
-        this.lung = request.getLung();
-        this.pleura = request.getPleura();
-        this.peritoneum = request.getPeritoneum();
-        this.liver = request.getLiver();
-        this.brain = request.getBrain();
+        this.preg = request.getPreg();
+        this.plas = request.getPlas();
+        this.pres = request.getPres();
         this.skin = request.getSkin();
-        this.neck = request.getNeck();
-        this.supraclavicular = request.getSupraclavicular();
-        this.axillar = request.getAxillar();
-        this.mediastinum = request.getMediastinum();
-        this.abdominal = request.getAbdominal();
+        this.insu = request.getInsu();
+        this.mass = request.getMass();
+        this.pedi = request.getPedi();
+        this.age = request.getAge();
     }
 
     // Getters
     public int getId() { return id; }
     public String getResultado() { return resultado; }
     public String getAdvice() { return advice; }
-
-    public String getAge() { return age; }
-    public String getSex() { return sex; }
-    public String getHistologicType() { return histologicType; }
-    public String getDegreeOfDifferentiation() { return degreeOfDifferentiation; }
-    public String getBone() { return bone; }
-    public String getBoneMarrow() { return boneMarrow; }
-    public String getLung() { return lung; }
-    public String getPleura() { return pleura; }
-    public String getPeritoneum() { return peritoneum; }
-    public String getLiver() { return liver; }
-    public String getBrain() { return brain; }
-    public String getSkin() { return skin; }
-    public String getNeck() { return neck; }
-    public String getSupraclavicular() { return supraclavicular; }
-    public String getAxillar() { return axillar; }
-    public String getMediastinum() { return mediastinum; }
-    public String getAbdominal() { return abdominal; }
+    public double getPreg() { return preg; }
+    public double getPlas() { return plas; }
+    public double getPres() { return pres; }
+    public double getSkin() { return skin; }
+    public double getInsu() { return insu; }
+    public double getMass() { return mass; }
+    public double getPedi() { return pedi; }
+    public double getAge() { return age; }
 }

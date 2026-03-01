@@ -1,73 +1,37 @@
 package com.example.weka_heart.entities;
 
 public class PredictionRequest {
-    private String age;
-    private String sex;
-    private String histologicType;
-    private String degreeOfDifferentiation;
-    private String bone;
-    private String boneMarrow;
-    private String lung;
-    private String pleura;
-    private String peritoneum;
-    private String liver;
-    private String brain;
-    private String skin;
-    private String neck;
-    private String supraclavicular;
-    private String axillar;
-    private String mediastinum;
-    private String abdominal;
+    private double preg; // Number of times pregnant
+    private double plas; // Plasma glucose concentration
+    private double pres; // Diastolic blood pressure
+    private double skin; // Triceps skin fold thickness
+    private double insu; // 2-Hour serum insulin
+    private double mass; // Body mass index
+    private double pedi; // Diabetes pedigree function
+    private double age;  // Age
 
-    // Getters y setters
-    public String getAge() { return age; }
-    public void setAge(String age) { this.age = age; }
+    // Getters y Setters
+    public double getPreg() { return preg; }
+    public void setPreg(double preg) { this.preg = preg; }
 
-    public String getSex() { return sex; }
-    public void setSex(String sex) { this.sex = sex; }
+    public double getPlas() { return plas; }
+    public void setPlas(double plas) { this.plas = plas; }
 
-    public String getHistologicType() { return histologicType; }
-    public void setHistologicType(String histologicType) { this.histologicType = histologicType; }
+    public double getPres() { return pres; }
+    public void setPres(double pres) { this.pres = pres; }
 
-    public String getDegreeOfDifferentiation() { return degreeOfDifferentiation; }
-    public void setDegreeOfDifferentiation(String degreeOfDifferentiation) { this.degreeOfDifferentiation = degreeOfDifferentiation; }
+    public double getSkin() { return skin; }
+    public void setSkin(double skin) { this.skin = skin; }
 
-    public String getBone() { return bone; }
-    public void setBone(String bone) { this.bone = bone; }
+    public double getInsu() { return insu; }
+    public void setInsu(double insu) { this.insu = insu; }
 
-    public String getBoneMarrow() { return boneMarrow; }
-    public void setBoneMarrow(String boneMarrow) { this.boneMarrow = boneMarrow; }
+    public double getMass() { return mass; }
+    public void setMass(double mass) { this.mass = mass; }
 
-    public String getLung() { return lung; }
-    public void setLung(String lung) { this.lung = lung; }
+    public double getPedi() { return pedi; }
+    public void setPedi(double pedi) { this.pedi = pedi; }
 
-    public String getPleura() { return pleura; }
-    public void setPleura(String pleura) { this.pleura = pleura; }
-
-    public String getPeritoneum() { return peritoneum; }
-    public void setPeritoneum(String peritoneum) { this.peritoneum = peritoneum; }
-
-    public String getLiver() { return liver; }
-    public void setLiver(String liver) { this.liver = liver; }
-
-    public String getBrain() { return brain; }
-    public void setBrain(String brain) { this.brain = brain; }
-
-    public String getSkin() { return skin; }
-    public void setSkin(String skin) { this.skin = skin; }
-
-    public String getNeck() { return neck; }
-    public void setNeck(String neck) { this.neck = neck; }
-
-    public String getSupraclavicular() { return supraclavicular; }
-    public void setSupraclavicular(String supraclavicular) { this.supraclavicular = supraclavicular; }
-
-    public String getAxillar() { return axillar; }
-    public void setAxillar(String axillar) { this.axillar = axillar; }
-
-    public String getMediastinum() { return mediastinum; }
-    public void setMediastinum(String mediastinum) { this.mediastinum = mediastinum; }
-
-    public String getAbdominal() { return abdominal; }
-    public void setAbdominal(String abdominal) { this.abdominal = abdominal; }
+    public double getAge() { return age; }
+    public void setAge(double age) { this.age = age; }
 }
