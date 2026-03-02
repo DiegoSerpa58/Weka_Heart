@@ -42,6 +42,11 @@ curl -X POST http://localhost:8080/api/prediction \
 -H "Content-Type: application/json" \
 -d "{\"preg\":6,\"plas\":148,\"pres\":72,\"skin\":35,\"insu\":0,\"mass\":33.6,\"pedi\":0.627,\"age\":50}"
 ```
+**Petición POST con PowerShell:**
+```bash
+$body = @{ preg=6; plas=148; pres=72; skin=35; insu=0; mass=33.6; pedi=0.627; age=50 } | ConvertTo-Json -Compress
+Invoke-RestMethod -Method Post -Uri "http://localhost:8080/api/prediction" -ContentType "application/json" -Body $body
+```
 
 **Respuesta de la API:**
 ```text
