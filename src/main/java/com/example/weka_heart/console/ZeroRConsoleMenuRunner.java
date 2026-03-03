@@ -1,5 +1,7 @@
 package com.example.weka_heart.console;
 
+import com.example.weka_heart.entities.PredictionRequest;
+import com.example.weka_heart.service.PredictionService;
 import com.example.weka_heart.service.ZeroRConsoleService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -10,9 +12,11 @@ import java.util.Scanner;
 public class ZeroRConsoleMenuRunner implements CommandLineRunner {
 
     private final ZeroRConsoleService zeroRConsoleService;
+    private final PredictionService predictionService;
 
-    public ZeroRConsoleMenuRunner(ZeroRConsoleService zeroRConsoleService) {
+    public ZeroRConsoleMenuRunner(ZeroRConsoleService zeroRConsoleService, PredictionService predictionService) {
         this.zeroRConsoleService = zeroRConsoleService;
+        this.predictionService = predictionService;
     }
 
     @Override
@@ -69,6 +73,19 @@ public class ZeroRConsoleMenuRunner implements CommandLineRunner {
             String predictedClass = zeroRConsoleService.predict(preg, plas, pres, skin, insu, mass, pedi, age);
             System.out.println("\nResultado de la predicción ZeroR: " + predictedClass);
             System.out.println("Nota: ZeroR siempre predice la clase mayoritaria del dataset, independientemente de los atributos ingresados.");
+
+            // Guardar la predicción en PredictionService para que aparezca en GET /api/prediction/patients
+            PredictionRequest request = new PredictionRequest();
+            request.setPreg(preg);
+            request.setPlas(plas);
+            request.setPres(pres);
+            request.setSkin(skin);
+            request.setInsu(insu);
+            request.setMass(mass);
+            request.setPedi(pedi);
+            request.setAge(age);
+            predictionService.predict(request);
+            System.out.println("✅ Predicción guardada en http://localhost:8080/api/prediction/patients");
         } catch (Exception e) {
             System.out.println("Error al realizar la predicción: " + e.getMessage());
         }
