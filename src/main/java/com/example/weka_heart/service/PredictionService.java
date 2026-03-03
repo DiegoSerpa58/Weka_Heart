@@ -75,7 +75,7 @@ public class PredictionService {
             double result = model.classifyInstance(instance);
             String predictedClass = datasetStructure.classAttribute().value((int) result);
 
-            String predictionText = "Predicción ZeroR: " + predictedClass + " (Nota: ZeroR siempre predice la clase mayoritaria).";
+            String predictionText = buildPredictionText(predictedClass);
 
             // Guardar la predicción inmediatamente para que esté disponible en GET /api/prediction/patients
             PatientPrediction predictionResult = new PatientPrediction(
@@ -104,7 +104,7 @@ public class PredictionService {
     }
 
     public PatientPrediction savePrediction(PredictionRequest request, String predictedClass) {
-        String predictionText = "Predicción ZeroR: " + predictedClass + " (Nota: ZeroR siempre predice la clase mayoritaria).";
+        String predictionText = buildPredictionText(predictedClass);
         PatientPrediction predictionResult = new PatientPrediction(
                 currentId++,
                 predictionText,
@@ -114,6 +114,10 @@ public class PredictionService {
         predictionResults.add(predictionResult);
         logger.info("✅ Predicción guardada en JSON (id={}).", predictionResult.getId());
         return predictionResult;
+    }
+
+    private String buildPredictionText(String predictedClass) {
+        return "Predicción ZeroR: " + predictedClass + " (Nota: ZeroR siempre predice la clase mayoritaria).";
     }
 
     private String getAdviceFromGroqAI(String predictedClass) {
