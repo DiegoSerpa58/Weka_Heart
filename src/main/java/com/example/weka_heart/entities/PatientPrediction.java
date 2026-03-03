@@ -30,10 +30,11 @@ public class PatientPrediction {
         this.age = request.getAge();
     }
 
-    // Getters
+    // Getters y Setters
     public int getId() { return id; }
     public String getResultado() { return resultado; }
     public String getAdvice() { return advice; }
+    public void setAdvice(String advice) { this.advice = advice; }
     public double getPreg() { return preg; }
     public double getPlas() { return plas; }
     public double getPres() { return pres; }

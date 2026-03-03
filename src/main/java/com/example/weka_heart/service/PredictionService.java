@@ -8,6 +8,8 @@ import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.concurrent.TimeUnit;
 import weka.classifiers.rules.ZeroR; // Importamos el algoritmo ZeroR
 import weka.core.DenseInstance;
 import weka.core.Instances;
@@ -73,16 +75,21 @@ public class PredictionService {
             double result = model.classifyInstance(instance);
             String predictedClass = datasetStructure.classAttribute().value((int) result);
 
-            String predictionText = "Predicción ZeroR: " + predictedClass + " (Nota: ZeroR siempre predice la clase mayoritaria).";
-            String advice = getAdviceFromGroqAI(predictedClass);
+            String predictionText = buildPredictionText(predictedClass);
 
+            // Guardar la predicción inmediatamente para que esté disponible en GET /api/prediction/patients
             PatientPrediction predictionResult = new PatientPrediction(
                     currentId++,
                     predictionText,
-                    advice,
+                    null,
                     request
             );
             predictionResults.add(predictionResult);
+            logger.info("✅ Predicción guardada en JSON (id={}).", predictionResult.getId());
+
+            // Intentar obtener consejos de la IA (no bloquea el guardado)
+            String advice = getAdviceFromGroqAI(predictedClass);
+            predictionResult.setAdvice(advice);
 
             return predictionText + (advice != null ? "\n\nConsejos de la IA:\n" + advice : "");
 
@@ -96,9 +103,31 @@ public class PredictionService {
         return new ArrayList<>(predictionResults);
     }
 
+    public PatientPrediction savePrediction(PredictionRequest request, String predictedClass) {
+        String predictionText = buildPredictionText(predictedClass);
+        PatientPrediction predictionResult = new PatientPrediction(
+                currentId++,
+                predictionText,
+                null,
+                request
+        );
+        predictionResults.add(predictionResult);
+        logger.info("✅ Predicción guardada en JSON (id={}).", predictionResult.getId());
+        return predictionResult;
+    }
+
+    private String buildPredictionText(String predictedClass) {
+        return "Predicción ZeroR: " + predictedClass + " (Nota: ZeroR siempre predice la clase mayoritaria).";
+    }
+
     private String getAdviceFromGroqAI(String predictedClass) {
         try {
-            OkHttpClient client = new OkHttpClient();
+            OkHttpClient client = new OkHttpClient.Builder()
+                    .connectTimeout(5, TimeUnit.SECONDS)
+                    .readTimeout(10, TimeUnit.SECONDS)
+                    .writeTimeout(5, TimeUnit.SECONDS)
+                    .callTimeout(15, TimeUnit.SECONDS)
+                    .build();
 
             String prompt = "Actúas como un médico endocrinólogo. Un paciente ha sido clasificado por un modelo de Machine Learning con el resultado: " +
                     predictedClass + " para diabetes. Proporciona recomendaciones médicas generales y breves.";

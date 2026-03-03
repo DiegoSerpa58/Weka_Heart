@@ -84,8 +84,8 @@ public class ZeroRConsoleMenuRunner implements CommandLineRunner {
             request.setMass(mass);
             request.setPedi(pedi);
             request.setAge(age);
-            predictionService.predict(request);
-            System.out.println("✅ Predicción guardada en http://localhost:8080/api/prediction/patients");
+            predictionService.savePrediction(request, predictedClass);
+            System.out.println("✅ Predicción guardada en JSON. Consúltala en: http://localhost:8080/api/prediction/patients");
         } catch (Exception e) {
             System.out.println("Error al realizar la predicción: " + e.getMessage());
         }
