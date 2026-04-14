@@ -47,23 +47,42 @@ async function loadAlgorithms() {
 /* ── Render algorithm cards ──────────────────────────────── */
 function renderAlgorithmGrid(algorithms) {
   const grid = document.getElementById('algorithm-grid');
-  grid.innerHTML = algorithms
-    .map(a => `
-      <div class="algorithm-card" id="algo-card-${a.id}"
-           role="button" tabindex="0"
-           onclick="selectAlgorithm('${a.id}')"
-           onkeydown="if(event.key==='Enter')selectAlgorithm('${a.id}')">
-        <div class="algo-icon">${ALGO_ICONS[a.id] || '⬡'}</div>
-        <div class="algo-name">${a.name}</div>
-        <div class="algo-desc">${a.description}</div>
-      </div>`)
-    .join('');
+  grid.innerHTML = '';
+
+  for (const a of algorithms) {
+    const card = document.createElement('div');
+    card.className    = 'algorithm-card';
+    card.dataset.algoId = a.id;        // safe: no innerHTML
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+
+    const iconEl = document.createElement('div');
+    iconEl.className   = 'algo-icon';
+    iconEl.textContent = ALGO_ICONS[a.id] || '⬡';
+
+    const nameEl = document.createElement('div');
+    nameEl.className   = 'algo-name';
+    nameEl.textContent = a.name;        // textContent – XSS safe
+
+    const descEl = document.createElement('div');
+    descEl.className   = 'algo-desc';
+    descEl.textContent = a.description; // textContent – XSS safe
+
+    card.appendChild(iconEl);
+    card.appendChild(nameEl);
+    card.appendChild(descEl);
+
+    card.addEventListener('click',   ()  => selectAlgorithm(a.id));
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter') selectAlgorithm(a.id); });
+
+    grid.appendChild(card);
+  }
 }
 
 function selectAlgorithm(id) {
   state.algorithm = id;
   document.querySelectorAll('.algorithm-card').forEach(card => {
-    card.classList.toggle('selected', card.id === `algo-card-${id}`);
+    card.classList.toggle('selected', card.dataset.algoId === id);
   });
 }
 

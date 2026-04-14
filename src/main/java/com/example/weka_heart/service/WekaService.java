@@ -38,6 +38,12 @@ public class WekaService {
     public ClassificationResult classify(MultipartFile file, String algorithm,
                                           String evaluationMethod, int folds,
                                           double trainPercent, int seed) throws Exception {
+        if (folds < 2 || folds > 100) {
+            throw new IllegalArgumentException("Number of folds must be between 2 and 100.");
+        }
+        if (trainPercent <= 0 || trainPercent >= 100) {
+            throw new IllegalArgumentException("Training percentage must be between 1 and 99.");
+        }
         Instances data = loadData(file);
         data.setClassIndex(data.numAttributes() - 1);
 
@@ -80,7 +86,8 @@ public class WekaService {
         Instances shuffled = new Instances(data);
         shuffled.randomize(new Random(seed));
 
-        int trainSize = (int) Math.round(shuffled.numInstances() * trainPercent / 100.0);
+        long trainSizeLong = Math.round(shuffled.numInstances() * trainPercent / 100.0);
+        int trainSize = (int) Math.min(trainSizeLong, (long) shuffled.numInstances() - 1);
         int testSize  = shuffled.numInstances() - trainSize;
 
         Instances trainSet = new Instances(shuffled, 0, trainSize);
