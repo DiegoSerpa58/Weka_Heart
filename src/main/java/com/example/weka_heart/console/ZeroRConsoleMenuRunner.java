@@ -4,11 +4,13 @@ import com.example.weka_heart.entities.PredictionRequest;
 import com.example.weka_heart.service.PredictionService;
 import com.example.weka_heart.service.ZeroRConsoleService;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 
 @Component
+@ConditionalOnProperty(name = "console.menu.enabled", havingValue = "true")
 public class ZeroRConsoleMenuRunner implements CommandLineRunner {
 
     private final ZeroRConsoleService zeroRConsoleService;
