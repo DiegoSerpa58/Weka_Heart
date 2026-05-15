@@ -1,6 +1,4 @@
 package com.example.weka_heart.service;
-
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import weka.core.Instances;
