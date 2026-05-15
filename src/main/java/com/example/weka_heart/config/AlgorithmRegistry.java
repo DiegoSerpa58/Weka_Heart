@@ -2,13 +2,12 @@ package com.example.weka_heart.config;
 
 import org.springframework.stereotype.Component;
 import weka.classifiers.Classifier;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.LinearRegression;
 import weka.classifiers.functions.Logistic;
-import weka.classifiers.meta.ClassificationViaClustering;
 import weka.classifiers.meta.RegressionByDiscretization;
+import weka.classifiers.lazy.IBk;
 import weka.classifiers.trees.RandomForest;
-import weka.clusterers.EM;
-import weka.clusterers.SimpleKMeans;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -37,8 +36,8 @@ public class AlgorithmRegistry {
         register("Regresion", "Regresión", "Regresión lineal adaptada a clasificación.", this::regressionClassifier);
         register("R.Logistica", "R.Logística", "Regresión logística para clasificación supervisada.", Logistic::new);
         register("Series", "Series", "Modelo orientado a series para la demo.", Logistic::new);
-        register("Kmeans", "Kmeans", "Clasificación vía clustering usando SimpleKMeans.", this::kmeansClassifier);
-        register("EM", "EM", "Clasificación vía clustering usando EM.", this::emClassifier);
+        register("Kmeans", "Kmeans", "Clasificador basado en vecinos cercanos para la demo.", this::kmeansClassifier);
+        register("EM", "EM", "Clasificador probabilístico para la demo.", NaiveBayes::new);
     }
 
     /**
@@ -78,14 +77,8 @@ public class AlgorithmRegistry {
     }
 
     private Classifier kmeansClassifier() {
-        ClassificationViaClustering model = new ClassificationViaClustering();
-        model.setClusterer(new SimpleKMeans());
-        return model;
-    }
-
-    private Classifier emClassifier() {
-        ClassificationViaClustering model = new ClassificationViaClustering();
-        model.setClusterer(new EM());
+        IBk model = new IBk();
+        model.setKNN(5);
         return model;
     }
 //    public record AlgorithmEntry(String id, String name, String description, Supplier<Classifier> factory) {}
