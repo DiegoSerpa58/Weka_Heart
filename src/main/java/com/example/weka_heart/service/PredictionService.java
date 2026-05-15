@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import weka.classifiers.Classifier;
-import weka.classifiers.rules.ZeroR; // Importamos el algoritmo ZeroR
+import weka.classifiers.rules.ZeroR;
 import weka.core.Instances;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -128,8 +128,7 @@ public class PredictionService implements PredictionServiceImpl {
     }
 
     private String buildLabel(String predictedClass) {
-        return "Predicción ZeroR: " + predictedClass +
-                " (modelo baseline - clase mayoritaria)";
+        return "Predicción demo: " + predictedClass;
     }
 }
     
