@@ -1,22 +1,17 @@
 package com.example.weka_heart.service;
 
-import ch.qos.logback.classic.Logger;
 import com.example.weka_heart.request.PatientDataRequest;
 import com.example.weka_heart.response.PredictionResponse;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import java.util.Collections;
 
 import weka.classifiers.Classifier;
 import weka.classifiers.rules.ZeroR; // Importamos el algoritmo ZeroR
 import weka.core.Instances;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -25,10 +20,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public class PredictionService implements PredictionServiceImpl {
 
     private static final String DATASET_PATH = "/DataSet/diabetes.arff";
+    private static final String DEMO_ADVICE = "Modo demo: sin recomendaciones de IA.";
 
     private final DatasetLoader datasetLoader;
     private final DiabetesInstanceBuilder instanceBuilder;
-    private final GroqAiClient groqAiClient;
 
     // Estado del modelo (inmutable después de init)
     private Instances datasetStructure;
@@ -76,13 +71,10 @@ public class PredictionService implements PredictionServiceImpl {
 
             String label = buildLabel(predictedClass);
 
-            // ⚠️ llamada externa → posible latencia
-            String advice = safeAdvice(predictedClass);
-
             PredictionResponse response = buildResponse(
                     predictedClass,
                     label,
-                    advice,
+                    DEMO_ADVICE,
                     request
             );
 
@@ -133,15 +125,6 @@ public class PredictionService implements PredictionServiceImpl {
                 advice,
                 request
         );
-    }
-
-    private String safeAdvice(String predictedClass) {
-        try {
-            return groqAiClient.getAdvice(predictedClass);
-        } catch (Exception e) {
-            log.warn("AI advice failed, returning fallback", e);
-            return "No advice available at the moment.";
-        }
     }
 
     private String buildLabel(String predictedClass) {

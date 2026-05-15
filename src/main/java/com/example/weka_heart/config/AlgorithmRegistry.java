@@ -2,9 +2,13 @@ package com.example.weka_heart.config;
 
 import org.springframework.stereotype.Component;
 import weka.classifiers.Classifier;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.rules.OneR;
-import weka.classifiers.rules.ZeroR;
+import weka.classifiers.functions.LinearRegression;
+import weka.classifiers.functions.Logistic;
+import weka.classifiers.meta.ClassificationViaClustering;
+import weka.classifiers.meta.RegressionByDiscretization;
+import weka.classifiers.trees.RandomForest;
+import weka.clusterers.EM;
+import weka.clusterers.SimpleKMeans;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,9 +33,12 @@ public class AlgorithmRegistry {
     private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
 
     public AlgorithmRegistry() {
-        register("ZeroR",      "ZeroR",       "Predicts the majority class. Useful as a baseline.",                        ZeroR::new);
-        register("OneR",       "OneR",        "Generates a one-rule classifier based on the best single attribute.",        OneR::new);
-        register("NaiveBayes", "Naive Bayes", "Probabilistic classifier using Bayes theorem with attribute independence.", NaiveBayes::new);
+        register("Random", "Random", "Clasificador tipo Random Forest para la demo.", RandomForest::new);
+        register("Regresion", "Regresión", "Regresión lineal adaptada a clasificación.", this::regressionClassifier);
+        register("R.Logistica", "R.Logística", "Regresión logística para clasificación supervisada.", Logistic::new);
+        register("Series", "Series", "Modelo orientado a series para la demo.", Logistic::new);
+        register("Kmeans", "Kmeans", "Clasificación vía clustering usando SimpleKMeans.", this::kmeansClassifier);
+        register("EM", "EM", "Clasificación vía clustering usando EM.", this::emClassifier);
     }
 
     /**
@@ -62,6 +69,24 @@ public class AlgorithmRegistry {
             ));
         }
         return list;
+    }
+
+    private Classifier regressionClassifier() {
+        RegressionByDiscretization model = new RegressionByDiscretization();
+        model.setClassifier(new LinearRegression());
+        return model;
+    }
+
+    private Classifier kmeansClassifier() {
+        ClassificationViaClustering model = new ClassificationViaClustering();
+        model.setClusterer(new SimpleKMeans());
+        return model;
+    }
+
+    private Classifier emClassifier() {
+        ClassificationViaClustering model = new ClassificationViaClustering();
+        model.setClusterer(new EM());
+        return model;
     }
 //    public record AlgorithmEntry(String id, String name, String description, Supplier<Classifier> factory) {}
 //

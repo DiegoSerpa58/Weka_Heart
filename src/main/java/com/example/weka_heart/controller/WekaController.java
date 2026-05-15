@@ -28,7 +28,7 @@ public class WekaController {
      * Classifies an uploaded dataset using the specified algorithm and evaluation method.
      *
      * @param file             ARFF or CSV multipart file
-     * @param algorithm        Algorithm ID (e.g. "ZeroR", "OneR", "NaiveBayes")
+     * @param algorithm        Algorithm ID (e.g. "Random", "R.Logistica", "Kmeans")
      * @param evaluationMethod "crossvalidation" or "percentagesplit"
      * @param folds            Folds for cross-validation (default 10)
      * @param trainPercent     Training percentage for percentage split (default 66.0)
@@ -37,7 +37,7 @@ public class WekaController {
     @PostMapping(value = "/classify", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ClassificationResult> classify(
             @RequestPart("file")                                      MultipartFile file,
-            @RequestParam(defaultValue = "ZeroR")           String    algorithm,
+            @RequestParam(defaultValue = "Random")          String    algorithm,
             @RequestParam(defaultValue = "crossvalidation") String    evaluationMethod,
             @RequestParam(defaultValue = "10")              int       folds,
             @RequestParam(defaultValue = "66.0")            double    trainPercent,

@@ -1,5 +1,5 @@
 /**
- * WekaAI – Classification Dashboard
+ * Weka Demo – Classification Dashboard
  * Handles: file upload (drag & drop), algorithm selection,
  *          REST calls to /api/weka/*, and result rendering.
  */
@@ -13,9 +13,12 @@ const state = {
 
 /* ── Icons mapped to algorithm IDs ─────────────────────────── */
 const ALGO_ICONS = {
-  ZeroR:      '◉',
-  OneR:       '◎',
-  NaiveBayes: '◈',
+  Random:      '🌲',
+  Regresion:   '📉',
+  'R.Logistica': '📊',
+  Series:      '📈',
+  Kmeans:      '🧩',
+  EM:          '🔀',
 };
 
 /* ═══════════════════════════════════════════════════════════
