@@ -19,7 +19,12 @@ import java.util.function.Supplier;
 @Component
 public class AlgorithmRegistry {
 
-    public record AlgorithmEntry(String id, String name, String description, Supplier<Classifier> factory) {}
+    public record AlgorithmEntry(
+            String id,
+            String name,
+            String description,
+            Supplier<Classifier> factory
+    ) {}
 
     private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
 
@@ -30,8 +35,8 @@ public class AlgorithmRegistry {
     }
 
     /**
-     * Register a new algorithm. Call this method in a subclass constructor or
-     * @PostConstruct to add custom classifiers without modifying this class.
+     * Register a new algorithm entry.
+     * Can be called from a @PostConstruct or subclass constructor to extend the registry.
      */
     public void register(String id, String name, String description, Supplier<Classifier> factory) {
         registry.put(id, new AlgorithmEntry(id, name, description, factory));
@@ -41,7 +46,7 @@ public class AlgorithmRegistry {
     public Classifier getClassifier(String id) {
         AlgorithmEntry entry = registry.get(id);
         if (entry == null) {
-            throw new IllegalArgumentException("Unknown algorithm: " + id);
+            throw new IllegalArgumentException("Unknown algorithm: '" + id + "'. Valid options: " + registry.keySet());
         }
         return entry.factory().get();
     }
@@ -51,11 +56,50 @@ public class AlgorithmRegistry {
         List<Map<String, String>> list = new ArrayList<>();
         for (AlgorithmEntry entry : registry.values()) {
             list.add(Map.of(
-                "id",          entry.id(),
-                "name",        entry.name(),
-                "description", entry.description()
+                    "id",          entry.id(),
+                    "name",        entry.name(),
+                    "description", entry.description()
             ));
         }
         return list;
     }
+//    public record AlgorithmEntry(String id, String name, String description, Supplier<Classifier> factory) {}
+//
+//    private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
+//
+//    public AlgorithmRegistry() {
+//        register("ZeroR",      "ZeroR",       "Predicts the majority class. Useful as a baseline.",                        ZeroR::new);
+//        register("OneR",       "OneR",        "Generates a one-rule classifier based on the best single attribute.",        OneR::new);
+//        register("NaiveBayes", "Naive Bayes", "Probabilistic classifier using Bayes theorem with attribute independence.", NaiveBayes::new);
+//    }
+//
+//    /**
+//     * Register a new algorithm. Call this method in a subclass constructor or
+//     * @PostConstruct to add custom classifiers without modifying this class.
+//     */
+//    public void register(String id, String name, String description, Supplier<Classifier> factory) {
+//        registry.put(id, new AlgorithmEntry(id, name, description, factory));
+//    }
+//
+//    /** Returns a fresh Classifier instance for the given algorithm ID. */
+//    public Classifier getClassifier(String id) {
+//        AlgorithmEntry entry = registry.get(id);
+//        if (entry == null) {
+//            throw new IllegalArgumentException("Unknown algorithm: " + id);
+//        }
+//        return entry.factory().get();
+//    }
+//
+//    /** Returns metadata about all registered algorithms (for the frontend). */
+//    public List<Map<String, String>> getAlgorithmList() {
+//        List<Map<String, String>> list = new ArrayList<>();
+//        for (AlgorithmEntry entry : registry.values()) {
+//            list.add(Map.of(
+//                "id",          entry.id(),
+//                "name",        entry.name(),
+//                "description", entry.description()
+//            ));
+//        }
+//        return list;
+//    }
 }
