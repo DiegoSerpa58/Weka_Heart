@@ -2,9 +2,13 @@ package com.example.weka_heart.config;
 
 import org.springframework.stereotype.Component;
 import weka.classifiers.Classifier;
-import weka.classifiers.bayes.NaiveBayes;
-import weka.classifiers.rules.OneR;
-import weka.classifiers.rules.ZeroR;
+import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.functions.LinearRegression;
+import weka.classifiers.functions.Logistic;
+import weka.classifiers.functions.SMO;
+import weka.classifiers.meta.RegressionByDiscretization;
+import weka.classifiers.lazy.IBk;
+import weka.classifiers.trees.RandomForest;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,9 +33,12 @@ public class AlgorithmRegistry {
     private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
 
     public AlgorithmRegistry() {
-        register("ZeroR",      "ZeroR",       "Predicts the majority class. Useful as a baseline.",                        ZeroR::new);
-        register("OneR",       "OneR",        "Generates a one-rule classifier based on the best single attribute.",        OneR::new);
-        register("NaiveBayes", "Naive Bayes", "Probabilistic classifier using Bayes theorem with attribute independence.", NaiveBayes::new);
+        register("Random", "Random", "Clasificador tipo Random Forest para la demo.", RandomForest::new);
+        register("Regresion", "Regresión", "Regresión lineal adaptada a clasificación.", this::regressionClassifier);
+        register("R.Logistica", "R.Logística", "Regresión logística para clasificación supervisada.", Logistic::new);
+        register("Series", "Series", "Clasificador por márgenes para demo de series.", SMO::new);
+        register("Kmeans", "Kmeans", "Demo inspirado en Kmeans usando vecinos cercanos.", this::kmeansClassifier);
+        register("EM", "EM", "Demo inspirado en EM con red bayesiana.", BayesNet::new);
     }
 
     /**
@@ -62,6 +69,18 @@ public class AlgorithmRegistry {
             ));
         }
         return list;
+    }
+
+    private Classifier regressionClassifier() {
+        RegressionByDiscretization model = new RegressionByDiscretization();
+        model.setClassifier(new LinearRegression());
+        return model;
+    }
+
+    private Classifier kmeansClassifier() {
+        IBk model = new IBk();
+        model.setKNN(5);
+        return model;
     }
 //    public record AlgorithmEntry(String id, String name, String description, Supplier<Classifier> factory) {}
 //

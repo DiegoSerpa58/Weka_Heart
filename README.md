@@ -1,4 +1,4 @@
-# Weka Heart – Dashboard Web + API (ZeroR, OneR, Naive Bayes) 🩺📊
+# Weka Heart – Dashboard Web + API (Demo Weka) 🩺📊
 
 ## Descripción 📚
 
@@ -20,26 +20,14 @@ Desde el navegador se puede:
 
 ## Algoritmos incluidos 🧠
 
-Actualmente el proyecto trabaja con varios algoritmos de Weka:
+Actualmente el proyecto trabaja con esta selección para la demo:
 
-### ZeroR
-
-- Es el modelo más simple posible.
-- Ignora todos los atributos de entrada.
-- Siempre predice la **clase mayoritaria** del dataset.
-- Se utiliza como **baseline**: si un modelo más complejo no supera a ZeroR, hay un problema.
-
-### OneR
-
-- Genera una única regla basada en **un solo atributo**.
-- Para cada valor de ese atributo, asigna la clase más frecuente observada.
-- Es muy simple, pero ya tiene en cuenta la información de los datos.
-
-### Naive Bayes
-
-- Clasificador probabilístico basado en el teorema de Bayes.
-- Asume independencia entre atributos.
-- Suele funcionar sorprendentemente bien en muchos problemas reales y sirve como un **modelo base fuerte**.
+- **Random**
+- **Regresión**
+- **R.Logística**
+- **Series**
+- **Kmeans**
+- **EM**
 
 El dashboard web permite **seleccionar cualquiera de estos algoritmos** y comparar resultados.
 
@@ -216,7 +204,7 @@ Con la aplicación ya corriendo:
 
 3. Deberías ver el **Classification Dashboard** con:
    - Un área para subir un dataset.
-   - Una sección con tarjetas de algoritmos (ZeroR, OneR, Naive Bayes, etc.).
+   - Una sección con tarjetas de algoritmos (Random, Regresión, R.Logística, Series, Kmeans, EM).
    - Un panel de resultados/métricas.
 
 ### Flujo básico dentro del dashboard
@@ -228,9 +216,12 @@ Con la aplicación ya corriendo:
 
 2. **Elegir un algoritmo**
    - En la sección de algoritmos, haz clic en uno:
-     - ZeroR
-     - OneR
-     - Naive Bayes
+      - Random
+      - Regresión
+      - R.Logística
+      - Series
+      - Kmeans
+      - EM
    - La tarjeta seleccionada quedará resaltada.
 
 3. **Elegir método de evaluación**
@@ -339,6 +330,6 @@ Mientras el contenedor esté corriendo, la app estará disponible en ese puerto.
    ```text
    http://localhost:8080/
    ```
-5. Subir dataset, elegir algoritmo (**ZeroR, OneR o Naive Bayes**) y ejecutar.
+5. Subir dataset, elegir algoritmo (**Random, Regresión, R.Logística, Series, Kmeans o EM**) y ejecutar.
 
 Con estos pasos, cualquier compañero sin mucha experiencia debería poder levantar y probar la aplicación sin problemas.
