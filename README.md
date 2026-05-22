@@ -11,7 +11,7 @@
 ### Características principales
 
 - 🔄 **Datasets personalizados** – Carga archivos `.arff` o `.csv` de cualquier fuente
-- 🧠 **Múltiples algoritmos** – Selecciona entre 6+ algoritmos de clasificación
+- 🧠 **Múltiples algoritmos** – Selecciona entre 9 algoritmos de clasificación
 - 📊 **Métricas detalladas** – Visualiza precisión, recall, F-measure y más
 - 🎯 **Evaluación flexible** – Cross-validation o Percentage Split
 - 🚀 **API REST** – Integración para aplicaciones externas
@@ -21,16 +21,19 @@
 
 ## 🧠 Algoritmos Disponibles
 
-La plataforma soporta los siguientes algoritmos de clasificación:
+La plataforma soporta los siguientes 9 algoritmos de clasificación:
 
-| Algoritmo | Tipo | Caso de uso |
+| Algoritmo | Tipo | Descripción |
 |-----------|------|-----------|
-| **Random** | Lazy Learning | Baseline rápido |
-| **Regresión Logística** | Lineal | Clasificación binaria estándar |
-| **Naive Bayes** | Probabilístico | Datos independientes |
-| **K-Means** | Clustering | Agrupamiento no supervisado |
-| **EM** | Probabilístico | Clustering probabilístico |
-| **SVM** | Kernel | Clasificación avanzada |
+| **ZeroR** | Baseline | Predice la clase mayoritaria. Utilizado como referencia base |
+| **OneR** | Lazy | Genera un clasificador de una sola regla basado en el mejor atributo |
+| **Naive Bayes** | Probabilístico | Clasificador probabilístico usando el teorema de Bayes con independencia de atributos |
+| **Random Forest** | Ensemble | Algoritmo tipo Random Forest para la demostración |
+| **Regresión** | Lineal | Regresión lineal adaptada a clasificación |
+| **R.Logística** | Lineal | Regresión logística para clasificación supervisada |
+| **Series** | Temporal | Clasificador por márgenes para demostración de series |
+| **Kmeans** | Clustering | Demostración inspirada en Kmeans usando vecinos cercanos |
+| **EM** | Probabilístico | Demostración inspirada en EM con red bayesiana |
 
 > Todos los algoritmos están integrados con **Apache Weka 3.8.x**
 
@@ -132,7 +135,16 @@ http://localhost:8080/
    - O selecciona mediante el navegador de archivos
 
 2. **🧪 Seleccionar algoritmo**
-   - Elige el algoritmo que deseas utilizar
+   - Elige entre los 9 algoritmos disponibles:
+     - **ZeroR** – Baseline para comparación
+     - **OneR** – Clasificador de una regla
+     - **Naive Bayes** – Probabilístico independiente
+     - **Random Forest** – Ensemble
+     - **Regresión** – Lineal adaptada
+     - **R.Logística** – Regresión logística
+     - **Series** – Temporal/Márgenes
+     - **Kmeans** – Clustering
+     - **EM** – Probabilístico bayesiano
    - La tarjeta se resaltará al seleccionar
 
 3. **⚙️ Configurar parámetros de evaluación**
@@ -295,4 +307,4 @@ Para reportar bugs, sugerencias o preguntas:
 ---
 
 **Última actualización:** Mayo 2026  
-**Versión:** 2.0 (Plataforma flexible con datasets personalizados)
+**Versión:** 2.1 (9 algoritmos disponibles)
