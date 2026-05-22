@@ -1,335 +1,298 @@
-# Weka Heart – Dashboard Web + API (Demo Weka) 🩺📊
+# Weka Heart – Web Dashboard & ML Analysis Platform 🩺📊
 
-## Descripción 📚
-
-Este proyecto es una **aplicación web** con **API REST** desarrollada con:
-
-- **Java 17 + Spring Boot**
-- **Apache Weka** para Machine Learning
-- **HTML, CSS y JavaScript** para el dashboard web
-
-El objetivo es **explorar algoritmos clásicos de clasificación** sobre el dataset de diabetes de Pima Indians, de forma educativa.
-
-Desde el navegador se puede:
-
-- Subir un dataset (`.arff` o `.csv`)
-- Elegir un algoritmo de clasificación
-- Obtener métricas y resultados de manera visual
+**Una plataforma web flexible para análisis de Machine Learning basada en Apache Weka.**
 
 ---
 
-## Algoritmos incluidos 🧠
+## 📋 Descripción
 
-Actualmente el proyecto trabaja con esta selección para la demo:
+**Weka Heart** es una aplicación web profesional que proporciona una interfaz intuitiva y potente para el análisis y clasificación de datos utilizando múltiples algoritmos de Machine Learning. La plataforma permite cargar datasets personalizados y comparar el rendimiento de diferentes algoritmos de forma interactiva.
 
-- **Random**
-- **Regresión**
-- **R.Logística**
-- **Series**
-- **Kmeans**
-- **EM**
+### Características principales
 
-El dashboard web permite **seleccionar cualquiera de estos algoritmos** y comparar resultados.
-
----
-
-## Dataset utilizado 📊
-
-Se utiliza el dataset:
-
-- **Pima Indians Diabetes Database**
-- Archivo: `diabetes.arff`
-
-Atributos principales:
-
-| Atributo (JSON) | Tipo de Dato | Descripción Médica                                 |
-|-----------------|--------------|----------------------------------------------------|
-| **preg**        | Numérico     | Número de embarazos                                |
-| **plas**        | Numérico     | Glucosa en plasma a 2 horas                       |
-| **pres**        | Numérico     | Presión arterial diastólica (mm Hg)               |
-| **skin**        | Numérico     | Grosor del pliegue cutáneo del tríceps (mm)       |
-| **insu**        | Numérico     | Nivel de insulina sérica a 2 horas (mu U/ml)      |
-| **mass**        | Numérico     | Índice de Masa Corporal (IMC)                     |
-| **pedi**        | Numérico     | Función de pedigrí de la diabetes (historial)     |
-| **age**         | Numérico     | Edad del paciente                                 |
-| **class**       | Nominal      | `tested_positive` o `tested_negative` (a predecir)|
+- 🔄 **Datasets personalizados** – Carga archivos `.arff` o `.csv` de cualquier fuente
+- 🧠 **Múltiples algoritmos** – Selecciona entre 6+ algoritmos de clasificación
+- 📊 **Métricas detalladas** – Visualiza precisión, recall, F-measure y más
+- 🎯 **Evaluación flexible** – Cross-validation o Percentage Split
+- 🚀 **API REST** – Integración para aplicaciones externas
+- 🐳 **Dockerizado** – Despliegue en contenedores sin dependencias locales
 
 ---
 
-## Tecnologías utilizadas 🛠️
+## 🧠 Algoritmos Disponibles
 
-- **Backend**
-  - Java 17
-  - Spring Boot 3.x
-  - Apache Weka 3.8.x
-- **Frontend**
-  - HTML
-  - CSS
-  - JavaScript (sin frameworks)
-- **Build y dependencias**
-  - Maven
-- **Contenedores (opcional)**
-  - Docker
+La plataforma soporta los siguientes algoritmos de clasificación:
 
----
+| Algoritmo | Tipo | Caso de uso |
+|-----------|------|-----------|
+| **Random** | Lazy Learning | Baseline rápido |
+| **Regresión Logística** | Lineal | Clasificación binaria estándar |
+| **Naive Bayes** | Probabilístico | Datos independientes |
+| **K-Means** | Clustering | Agrupamiento no supervisado |
+| **EM** | Probabilístico | Clustering probabilístico |
+| **SVM** | Kernel | Clasificación avanzada |
 
-## 1. Requisitos previos (para principiantes) ✅
-
-Antes de intentar ejecutar el proyecto, asegúrate de tener:
-
-1. **Java 17 (JDK 17)**  
-   - Comprobar en la terminal:
-     ```bash
-     java -version
-     ```
-     Debería mostrar `17` o superior (pero este proyecto está pensado para 17).
-
-2. **Maven** (si vas a compilar sin Docker)  
-   - Comprobar:
-     ```bash
-     mvn -version
-     ```
-
-3. (Opcional) **Docker**  
-   - Solo si quieres ejecutar la aplicación dentro de un contenedor, sin instalar Java/Maven localmente.
-
-4. Un editor/IDE (recomendado)
-   - IntelliJ IDEA
-   - VS Code (con extensiones de Java)
-   - Eclipse
+> Todos los algoritmos están integrados con **Apache Weka 3.8.x**
 
 ---
 
-## 2. Clonar el proyecto 🧬
+## 🛠️ Tecnologías
 
-### Opción A: Usando Git (recomendado)
+### Backend
+- **Java 17** – Lenguaje principal
+- **Spring Boot 3.x** – Framework web
+- **Apache Weka 3.8.x** – Motor de Machine Learning
+- **Maven** – Gestor de dependencias
 
-1. Abrir una terminal (Command Prompt / PowerShell en Windows, Terminal en Linux/macOS).
-2. Ejecutar:
+### Frontend
+- **HTML5** – Estructura
+- **CSS3** – Estilos y responsividad
+- **JavaScript (Vanilla)** – Interactividad sin dependencias
 
-   ```bash
-   git clone https://github.com/DiegoSerpa58/Weka_Heart.git
-   cd Weka_Heart
-   ```
-
-### Opción B: Descargar ZIP desde GitHub
-
-1. Ir al repositorio en GitHub.
-2. Clicar en **Code → Download ZIP**.
-3. Extraer el `.zip`.
-4. Abrir una terminal dentro de la carpeta extraída (`Weka_Heart`).
+### Infraestructura
+- **Docker** – Contenedorización (opcional)
+- **Docker Compose** – Orquestación
 
 ---
 
-## 3. Ejecutar la aplicación con Maven (forma sencilla) 🚀
+## 📦 Requisitos Previos
 
-> Estos pasos asumen que ya estás dentro de la carpeta del proyecto `Weka_Heart`.
+Asegúrate de tener instalado:
 
-### 3.1. Usando el wrapper de Maven (sin instalar Maven globalmente)
+| Requisito | Versión | Obligatorio |
+|-----------|---------|-----------|
+| Java JDK | 17+ | ✅ Sí |
+| Maven | 3.8+ | ⚠️ Opcional* |
+| Docker | Latest | ⚠️ Opcional |
 
-#### En Windows
+*Si usas `mvnw` (Maven Wrapper), no necesitas instalar Maven globalmente.
 
-1. Abrir **PowerShell** o **Command Prompt** en la carpeta del proyecto.
-2. Ejecutar:
-
-   ```bash
-   mvnw.cmd spring-boot:run
-   ```
-
-#### En Linux / macOS
-
-1. Abrir **Terminal** en la carpeta del proyecto.
-2. Dar permisos al wrapper (solo la primera vez):
-
-   ```bash
-   chmod +x mvnw
-   ```
-
-3. Ejecutar:
-
-   ```bash
-   ./mvnw spring-boot:run
-   ```
-
-### 3.2. Usando Maven instalado globalmente
-
-Si ya tienes Maven instalado y configurado:
+### Verificar instalación
 
 ```bash
+java -version           # Debe mostrar Java 17+
+mvn -version           # Si Maven está instalado globalmente
+```
+
+---
+
+## 🚀 Instalación y Ejecución
+
+### 1️⃣ Clonar el repositorio
+
+```bash
+git clone https://github.com/DiegoSerpa58/Weka_Heart.git
+cd Weka_Heart
+```
+
+### 2️⃣ Ejecutar con Maven Wrapper (Recomendado)
+
+#### Windows
+```bash
+mvnw.cmd spring-boot:run
+```
+
+#### Linux / macOS
+```bash
+chmod +x mvnw
+./mvnw spring-boot:run
+```
+
+### 3️⃣ Ejecutar con Maven global
+
+```bash
+mvn clean install
 mvn spring-boot:run
 ```
 
-### 3.3. ¿Cómo sé que arrancó bien?
-
-En la consola deberías ver mensajes de Spring Boot y algo similar a:
-
-```text
-Started WekaHeartApplication in X.XXX seconds
-```
-
-Y que está escuchando en el puerto `8080`.
-
----
-
-## 4. Ejecutar desde un IDE (IntelliJ / VS Code / Eclipse) 💻
-
-1. Abrir el IDE.
-2. Importar el proyecto como **Maven Project** (o “Open Existing Project” apuntando a la carpeta `Weka_Heart`).
-3. Buscar la clase principal:
-
-   ```text
-   src/main/java/com/example/weka_heart/WekaHeartApplication.java
-   ```
-
-4. Hacer clic derecho sobre `WekaHeartApplication` → **Run 'WekaHeartApplication'**.
-5. Esperar a que Spring Boot levante.
-6. Abrir en el navegador:
-
-   ```text
-   http://localhost:8080/
-   ```
-
----
-
-## 5. Abrir y usar el dashboard web 🌐
-
-Con la aplicación ya corriendo:
-
-1. Abrir un navegador (Chrome, Edge, Firefox…).
-2. Ir a:
-
-   ```text
-   http://localhost:8080/
-   ```
-
-3. Deberías ver el **Classification Dashboard** con:
-   - Un área para subir un dataset.
-   - Una sección con tarjetas de algoritmos (Random, Regresión, R.Logística, Series, Kmeans, EM).
-   - Un panel de resultados/métricas.
-
-### Flujo básico dentro del dashboard
-
-1. **Subir un dataset**
-   - Arrastra un archivo `.arff` o `.csv` a la zona de “Drop zone”,  
-     o haz clic para seleccionar el archivo desde el explorador.
-   - Si el tipo de archivo no es válido, verás un mensaje de error.
-
-2. **Elegir un algoritmo**
-   - En la sección de algoritmos, haz clic en uno:
-      - Random
-      - Regresión
-      - R.Logística
-      - Series
-      - Kmeans
-      - EM
-   - La tarjeta seleccionada quedará resaltada.
-
-3. **Elegir método de evaluación**
-   - Puedes alternar entre:
-     - **Cross-validation (k-folds)**
-     - **Percentage split** (porcentaje de entrenamiento)
-   - Completar:
-     - `folds` (por ejemplo, 10)
-     - `trainPercent` (por ejemplo, 70)
-     - `seed` (un número entero)
-
-4. **Ejecutar la clasificación**
-   - Pulsar el botón de **Run / Ejecutar**.
-   - Aparecerá un indicador de carga mientras el backend procesa.
-   - Al finalizar, se muestran métricas y resultados en el panel de resultados.
-
----
-
-## 6. Probar el backend por API (opcional) 🔗
-
-Además del dashboard, el backend expone endpoints REST.
-
-Ejemplo sencillo de petición `POST` (usando uno de los modelos que espera parámetros numéricos):
+### 4️⃣ Ejecutar con Docker
 
 ```bash
-curl -X POST http://localhost:8080/api/prediction \
--H "Content-Type: application/json" \
--d "{\"preg\":6,\"plas\":148,\"pres\":72,\"skin\":35,\"insu\":0,\"mass\":33.6,\"pedi\":0.627,\"age\":50}"
+# Construir la imagen
+docker build -t weka-heart .
+
+# Ejecutar el contenedor
+docker run -p 8080:8080 weka-heart
 ```
 
-La respuesta será un texto con la predicción, y dependiendo del algoritmo seleccionado en el servicio, puede mostrar:
+---
 
-- La clase predicha (`tested_positive` / `tested_negative`).
-- Mensajes adicionales según tu implementación.
+## 💻 Acceder a la Aplicación
 
-**Nota:**  
-Cuando se usa **ZeroR**, la predicción depende solo de la clase mayoritaria del dataset.  
-Con **OneR** y **Naive Bayes**, la predicción sí depende de los atributos enviados.
+Una vez que el servidor está corriendo, abre tu navegador en:
+
+```
+http://localhost:8080/
+```
+
+### Flujo de trabajo principal
+
+1. **📁 Cargar dataset**
+   - Arrastra un archivo `.arff` o `.csv` a la zona de carga
+   - O selecciona mediante el navegador de archivos
+
+2. **🧪 Seleccionar algoritmo**
+   - Elige el algoritmo que deseas utilizar
+   - La tarjeta se resaltará al seleccionar
+
+3. **⚙️ Configurar parámetros de evaluación**
+   - Elige entre **Cross-Validation** o **Percentage Split**
+   - Especifica `folds` (para CV), `trainPercent` (para Split) y `seed`
+
+4. **▶️ Ejecutar análisis**
+   - Haz clic en "Run / Ejecutar"
+   - Visualiza las métricas en tiempo real
+
+5. **📊 Analizar resultados**
+   - Precision, Recall, F-Measure
+   - Matriz de confusión
+   - Tiempo de entrenamiento
 
 ---
 
-## 7. Ejecutar con Docker (opcional) 🐳
+## 🔗 API REST
 
-Si no quieres instalar Java ni Maven localmente, pero sí tienes Docker, puedes ejecutar así:
+Además del dashboard web, la plataforma expone una API REST para integración con otras aplicaciones.
 
-1. Desde la carpeta del proyecto, construir la imagen:
+### Endpoints principales
 
-   ```bash
-   docker build -t weka-heart .
-   ```
+#### Cargar y clasificar dataset
+```http
+POST /api/classify
+Content-Type: application/json
 
-2. Ejecutar el contenedor:
+{
+  "algorithm": "NaiveBayes",
+  "evaluationMethod": "CrossValidation",
+  "folds": 10,
+  "seed": 42,
+  "fileContent": "..."  // contenido del archivo
+}
+```
 
-   ```bash
-   docker run --rm -p 8080:8080 weka-heart
-   ```
+**Respuesta:**
+```json
+{
+  "algorithm": "NaiveBayes",
+  "accuracy": 0.85,
+  "precision": 0.82,
+  "recall": 0.88,
+  "fmeasure": 0.85,
+  "executionTime": 1234,
+  "confusionMatrix": [[...], [...]]
+}
+```
 
-3. Abrir en el navegador:
+#### Predicción individual
+```http
+POST /api/prediction
+Content-Type: application/json
 
-   ```text
-   http://localhost:8080/
-   ```
-
-Mientras el contenedor esté corriendo, la app estará disponible en ese puerto.
+{
+  "preg": 6,
+  "plas": 148,
+  "pres": 72,
+  "skin": 35,
+  "insu": 0,
+  "mass": 33.6,
+  "pedi": 0.627,
+  "age": 50
+}
+```
 
 ---
 
-## 8. Errores comunes y cómo resolverlos 🩹
+## 📊 Formatos de Datos Soportados
 
-- **`java: command not found` o versión < 17**  
-  → Instalar **JDK 17**, actualizar variables de entorno y comprobar con `java -version`.
+### ARFF (Attribute-Relation File Format)
+```
+@relation diabetes
+@attribute preg numeric
+@attribute plas numeric
+@attribute class {tested_positive, tested_negative}
+@data
+6,148,72,35,0,33.6,0.627,50,tested_positive
+1,85,66,29,0,26.6,0.351,31,tested_negative
+```
 
-- **`mvn: command not found`**  
-  → Instalar Maven o usar el wrapper:
-  - Windows: `mvnw.cmd spring-boot:run`
-  - Linux/macOS: `./mvnw spring-boot:run`
-
-- **El navegador no abre nada en `http://localhost:8080`**  
-  - Verificar que la app sigue corriendo en la consola (sin errores).
-  - Comprobar que ningún otro programa esté usando el puerto 8080.
-
-- **Error al subir archivo**  
-  - Asegurarse de que el archivo sea `.arff` o `.csv`.
-  - Revisar que el archivo tenga el formato esperado por Weka.
+### CSV (Comma-Separated Values)
+```csv
+preg,plas,pres,skin,insu,mass,pedi,age,class
+6,148,72,35,0,33.6,0.627,50,tested_positive
+1,85,66,29,0,26.6,0.351,31,tested_negative
+```
 
 ---
 
-## 9. Resumen rápido para tus compañeros 🧾
+## 🐛 Troubleshooting
 
-1. Instalar **Java 17** (y opcionalmente **Maven** o **Docker**).
-2. Clonar el repo:
-   ```bash
-   git clone https://github.com/DiegoSerpa58/Weka_Heart.git
-   cd Weka_Heart
-   ```
-3. Ejecutar (Windows):
-   ```bash
-   mvnw.cmd spring-boot:run
-   ```
-   Ejecutar (Linux/macOS):
-   ```bash
-   chmod +x mvnw
-   ./mvnw spring-boot:run
-   ```
-4. Abrir en el navegador:
-   ```text
-   http://localhost:8080/
-   ```
-5. Subir dataset, elegir algoritmo (**Random, Regresión, R.Logística, Series, Kmeans o EM**) y ejecutar.
+| Problema | Solución |
+|----------|----------|
+| `java: command not found` | Instala JDK 17+ y configura `JAVA_HOME` |
+| `mvn: command not found` | Usa el Maven Wrapper: `./mvnw spring-boot:run` |
+| Puerto 8080 en uso | Cambia el puerto en `application.properties`: `server.port=8081` |
+| Error al cargar archivo | Verifica que sea `.arff` o `.csv` con formato válido |
+| La app no responde | Comprueba los logs de Spring Boot en la consola |
 
-Con estos pasos, cualquier compañero sin mucha experiencia debería poder levantar y probar la aplicación sin problemas.
+---
+
+## 📁 Estructura del Proyecto
+
+```
+Weka_Heart/
+├── src/
+│   ├── main/
+│   │   ├── java/com/example/weka_heart/
+│   │   │   ├── WekaHeartApplication.java
+│   │   │   ├── controller/
+│   │   │   ├── service/
+│   │   │   └── model/
+│   │   └── resources/
+│   │       ├── templates/       # HTML templates
+│   │       ├── static/          # CSS, JS, assets
+│   │       └── application.properties
+│   └── test/
+├── pom.xml                       # Dependencias Maven
+├── Dockerfile                    # Configuración Docker
+└── mvnw / mvnw.cmd             # Maven Wrapper
+```
+
+---
+
+## 🤝 Contribuir
+
+Las contribuciones son bienvenidas. Por favor:
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
+
+---
+
+## 📄 Licencia
+
+Este proyecto se distribuye bajo licencia educativa. Consulta el archivo `LICENSE` para más detalles.
+
+---
+
+## 📧 Contacto y Soporte
+
+Para reportar bugs, sugerencias o preguntas:
+
+- 📌 **Issues en GitHub** – [Crear un issue](https://github.com/DiegoSerpa58/Weka_Heart/issues)
+- 👤 **Autor** – Diego Serpa
+
+---
+
+## 🎓 Referencias
+
+- [Apache Weka Documentation](https://www.cs.waikato.ac.nz/ml/weka/)
+- [Spring Boot Official Guide](https://spring.io/projects/spring-boot)
+- [Java 17 Documentation](https://docs.oracle.com/en/java/javase/17/)
+
+---
+
+**Última actualización:** Mayo 2026  
+**Versión:** 2.0 (Plataforma flexible con datasets personalizados)
