@@ -3,11 +3,14 @@ package com.example.weka_heart.config;
 import org.springframework.stereotype.Component;
 import weka.classifiers.Classifier;
 import weka.classifiers.bayes.BayesNet;
+import weka.classifiers.bayes.NaiveBayes;
 import weka.classifiers.functions.LinearRegression;
 import weka.classifiers.functions.Logistic;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.meta.RegressionByDiscretization;
 import weka.classifiers.lazy.IBk;
+import weka.classifiers.rules.OneR;
+import weka.classifiers.rules.ZeroR;
 import weka.classifiers.trees.RandomForest;
 
 import java.util.ArrayList;
@@ -33,6 +36,9 @@ public class AlgorithmRegistry {
     private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
 
     public AlgorithmRegistry() {
+        register("ZeroR",      "ZeroR",       "Predice la clase mayoritaria. Útil como referencia base.", ZeroR::new);
+        register("OneR",       "OneR",        "Genera un clasificador de una sola regla basado en el mejor atributo.", OneR::new);
+        register("NaiveBayes", "Naive Bayes", "Clasificador probabilístico usando el teorema de Bayes con independencia de atributos.", NaiveBayes::new);
         register("Random", "Random", "Clasificador tipo Random Forest para la demo.", RandomForest::new);
         register("Regresion", "Regresión", "Regresión lineal adaptada a clasificación.", this::regressionClassifier);
         register("R.Logistica", "R.Logística", "Regresión logística para clasificación supervisada.", Logistic::new);
