@@ -36,9 +36,9 @@ public class AlgorithmRegistry {
     private final LinkedHashMap<String, AlgorithmEntry> registry = new LinkedHashMap<>();
 
     public AlgorithmRegistry() {
-        register("ZeroR",      "ZeroR",       "Predicts the majority class. Useful as a baseline.", ZeroR::new);
-        register("OneR",       "OneR",        "Generates a one-rule classifier based on the best single attribute.", OneR::new);
-        register("NaiveBayes", "Naive Bayes", "Probabilistic classifier using Bayes theorem with attribute independence.", NaiveBayes::new);
+        register("ZeroR",      "ZeroR",       "Predice la clase mayoritaria. Útil como referencia base.", ZeroR::new);
+        register("OneR",       "OneR",        "Genera un clasificador de una sola regla basado en el mejor atributo.", OneR::new);
+        register("NaiveBayes", "Naive Bayes", "Clasificador probabilístico usando el teorema de Bayes con independencia de atributos.", NaiveBayes::new);
         register("Random", "Random", "Clasificador tipo Random Forest para la demo.", RandomForest::new);
         register("Regresion", "Regresión", "Regresión lineal adaptada a clasificación.", this::regressionClassifier);
         register("R.Logistica", "R.Logística", "Regresión logística para clasificación supervisada.", Logistic::new);
